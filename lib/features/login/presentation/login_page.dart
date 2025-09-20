@@ -12,18 +12,6 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Positioned(
-              left: 12,
-              top: 8,
-              child: Text(
-                'LOG IN',
-                style: GoogleFonts.josefinSans(
-                  color: const Color(0xFF1B1B1B),
-                  fontSize: 12,
-                  letterSpacing: 1.2,
-                ),
-              ),
-            ),
             Center(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
