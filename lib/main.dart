@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntech/features/home/presentation/pages/home_page.dart';
 import 'package:tukuntech/features/login/presentation/login_page.dart';
+import 'package:tukuntech/features/register/presentation/register_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
   initialRoute: '/login',
   routes: {
     '/login': (_) => const LoginPage(),
+    '/register': (_) => const RegisterPage(),
     '/home': (_) => const HomePage(),
-  
+
   },
 );
   }
