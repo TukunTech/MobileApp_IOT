@@ -1,7 +1,8 @@
 name: tukuntech
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+
+version: 1.0.0+1
 
 environment:
   sdk: ^3.8.1
@@ -9,6 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^0.13.6
+  flutter_bloc: ^8.1.3
+  url_launcher: ^6.2.5
+  equatable: ^2.0.5
+  sqflite: ^2.4.2
+  path: ^1.9.1
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +26,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icon.png
+    - assets/home_icon.png
+    - assets/vitalsigns_icon.png
+    - assets/history_icon.png
+    - assets/profile_icon.png
+    - assets/subscription.png
+    - assets/support.png
+    - assets/logout.png
+    - assets/sidebar.png
