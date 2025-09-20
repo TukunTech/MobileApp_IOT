@@ -12,20 +12,24 @@ class ToggleSidebar extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      
       icon: Image.asset(
         "assets/sidebar.png",
         width: 28,
         height: 28,
-        color: const Color(0xFFF0E8D5), 
+        color: const Color(0xFFF0E8D5),
       ),
       onSelected: (value) {
-        if (value == 0) {
-         
-        } else if (value == 1) {
-          
-        } else if (value == 2) {
-         
+        switch (value) {
+          case 0: // Subscription
+            Navigator.of(context).pushNamed('/subscription');
+            break;
+          case 1: // Support
+            Navigator.of(context).pushNamed('/support');
+            break;
+          case 2: // Log out
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/login', (route) => false);
+            break;
         }
       },
       itemBuilder: (context) => [
