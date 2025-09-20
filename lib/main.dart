@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntech/features/home/presentation/pages/home_page.dart';
+import 'package:tukuntech/features/login/presentation/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +12,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Quita el banner de debug
-      title: 'Tukuntech',
-      theme: ThemeData(
-        useMaterial3: true, // Opcional, da estilos más modernos
-      ),
-      home: const HomePage(), 
-    );
+  debugShowCheckedModeBanner: false,
+  title: 'Tukuntech',
+  theme: ThemeData(useMaterial3: true),
+  initialRoute: '/login',
+  routes: {
+    '/login': (_) => const LoginPage(),
+    '/home': (_) => const HomePage(),
+  
+  },
+);
   }
 }
