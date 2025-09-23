@@ -22,27 +22,34 @@ class BaseScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1B1B1B),
         elevation: 0,
-        title: Row(
+        leading: const ToggleSidebar(), // 👈 ahora está en la esquina
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ToggleSidebar(), 
-            const SizedBox(width: 8),
             Text(
               title,
               style: GoogleFonts.darkerGrotesque(
-                fontSize: 50,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: const Color(0xFFF0E8D5),
               ),
             ),
+            const SizedBox(height: 4),
+            Container(
+              height: 3,
+              width: 140,
+              color: const Color(0xFFF0E8D5),
+            ),
           ],
         ),
+        centerTitle: false, // 👈 asegura que se alinee a la izquierda
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: Image.asset(
               "assets/icon.png",
-              width: 50,
-              height: 50,
+              width: 42,
+              height: 42,
             ),
           ),
         ],
