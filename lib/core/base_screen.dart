@@ -22,7 +22,7 @@ class BaseScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1B1B1B),
         elevation: 0,
-        leading: const ToggleSidebar(), // 👈 ahora está en la esquina
+        leading: const ToggleSidebar(), 
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,7 +42,7 @@ class BaseScreen extends StatelessWidget {
             ),
           ],
         ),
-        centerTitle: false, // 👈 asegura que se alinee a la izquierda
+        centerTitle: false, 
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
