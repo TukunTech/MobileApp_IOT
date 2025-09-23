@@ -17,11 +17,10 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const backgroundColor = Color(0xFF1C1C1C);
     const activeBackground = Color(0xFF3A3A3A);
 
     return Container(
-      color: backgroundColor,
+      color: Colors.black, // 👈 negro puro
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
