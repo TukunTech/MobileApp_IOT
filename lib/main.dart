@@ -5,6 +5,7 @@ import 'package:tukuntech/features/register/presentation/register_page.dart';
 import 'package:tukuntech/features/profile/presentation/profile_page.dart';
 import 'package:tukuntech/features/support/presentation/pages/support_page.dart';
 import 'package:tukuntech/features/subscription/presentation/pages/subscription_page.dart';
+import 'package:tukuntech/features/vitalsigns/presentation/pages/vitalsigns_page.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/profile': (_) => const ProfilePage(),
         '/support':(_) => const SupportPage(),
         '/subscription': (context) => const SubscriptionPage(),
+        '/vitals': (context) => const VitalSignsPage(),
       },
     );
   }
