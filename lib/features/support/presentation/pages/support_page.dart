@@ -36,7 +36,7 @@ class SupportPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Línea debajo del título Support
+          
           Container(
             margin: const EdgeInsets.only(left: 16, top: 8,bottom: 16),
             height: 3,
@@ -45,7 +45,7 @@ class SupportPage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // Frequently Questions
+         
           Text(
             "FREQUENTLY QUESTIONS",
             style: GoogleFonts.josefinSans(
@@ -59,7 +59,7 @@ class SupportPage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // Carrusel
+          
           Expanded(
             child: PageView.builder(
               itemCount: questions.length,
