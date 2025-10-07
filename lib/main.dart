@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tukuntech/features/history/presentation/pages/history_page.dart';
 import 'package:tukuntech/features/home/presentation/pages/home_page.dart';
 import 'package:tukuntech/features/login/presentation/login_page.dart';
 import 'package:tukuntech/features/register/presentation/register_page.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/support':(_) => const SupportPage(),
         '/subscription': (context) => const SubscriptionPage(),
         '/vitals': (context) => const VitalSignsPage(),
+        '/history': (context) => const HistoryPage(),
       },
     );
   }
