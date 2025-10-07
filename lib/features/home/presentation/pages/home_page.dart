@@ -74,7 +74,9 @@ class HomePage extends StatelessWidget {
 
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/subscription');
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFF0E8D5),
                         foregroundColor: Colors.black,
