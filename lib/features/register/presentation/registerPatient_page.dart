@@ -512,23 +512,6 @@ Future<void> _submit() async {
                               ),
                             ),
                             const SizedBox(height: 12),
-
-                            // Volver a Login
-                            TextButton(
-                              onPressed: _isLoading
-                                  ? null
-                                  : () => Navigator.of(context)
-                                      .pushNamedAndRemoveUntil(
-                                          '/login', (_) => false),
-                              child: Text(
-                                'Already have an account? Sign in',
-                                style: GoogleFonts.darkerGrotesque(
-                                  fontSize: 14,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
