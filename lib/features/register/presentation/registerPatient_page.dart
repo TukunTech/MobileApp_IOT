@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:tukuntech/core/auth_session.dart';
 
 // ===== Enums requeridos por tu API =====
 enum Gender { male, female, other }
@@ -117,63 +118,68 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) return;
+Future<void> _submit() async {
+  if (!_formKey.currentState!.validate()) return;
 
-    setState(() => _isLoading = true);
-    try {
-      final body = {
-        "firstName": _firstNameCtrl.text.trim(),
-        "lastName": _lastNameCtrl.text.trim(),
-        "dni": _dniCtrl.text.trim(),
-        "age": int.parse(_ageCtrl.text.trim()),
-        "gender": _gender.api,
-        "bloodGroup": _bloodGroup.api,
-        "nationality": _nationality.api,
-        "allergy": _allergy.api,
-      };
-
-      final res = await http
-          .post(
-            Uri.parse(_profilesUrl),
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              // Si tu backend requiere token:
-              // 'Authorization': 'Bearer $token',
-            },
-            body: jsonEncode(body),
-          )
-          .timeout(const Duration(seconds: 20));
-
-      if (res.statusCode >= 200 && res.statusCode < 300) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Perfil creado correctamente')),
-        );
-        // Navega al login (o donde prefieras)
-        Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => false);
-      } else {
-        String message = 'No se pudo crear el perfil';
-        try {
-          final err = jsonDecode(res.body);
-          message = (err['message'] ?? err['error'] ?? message).toString();
-        } catch (_) {}
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(message),
-        ));
-      }
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content:
-            Text('Error de conexión. Verifica tu Internet o el servidor.'),
-      ));
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
-    }
+  final token = AuthSession.getToken();
+  if (token == null || token.isEmpty) {
+    // Si no hay token, evita 401 y guía al usuario
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Sesión no válida. Inicia sesión de nuevo.')),
+    );
+    if (!mounted) return;
+    Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => false);
+    return;
   }
+
+  setState(() => _isLoading = true);
+  try {
+    final body = {
+      "firstName": _firstNameCtrl.text.trim(),
+      "lastName": _lastNameCtrl.text.trim(),
+      "dni": _dniCtrl.text.trim(),
+      "age": int.parse(_ageCtrl.text.trim()),
+      "gender": _gender.api,
+      "bloodGroup": _bloodGroup.api,
+      "nationality": _nationality.api,
+      "allergy": _allergy.api,
+    };
+
+    final res = await http.post(
+      Uri.parse('https://tukuntech-back.onrender.com/api/v1/profiles'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token', // ← IMPORTANTE
+      },
+      body: jsonEncode(body),
+    ).timeout(const Duration(seconds: 20));
+
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Perfil creado correctamente')),
+      );
+      Navigator.of(context).pushNamedAndRemoveUntil('/home', (_) => false);
+    } else {
+      String message = 'No se pudo crear el perfil';
+      try {
+        final err = jsonDecode(res.body);
+        message = (err['message'] ?? err['error'] ?? message).toString();
+      } catch (_) {}
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    }
+  } catch (_) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Error de conexión.')),
+    );
+  } finally {
+    if (mounted) setState(() => _isLoading = false);
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
